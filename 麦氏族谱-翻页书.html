@@ -41,27 +41,54 @@
     inset: 0;
     border-radius: 4mm 1.5mm 1.5mm 4mm;
     background:
-      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px),
-      linear-gradient(0deg, rgba(255,255,255,0.05) 1px, transparent 1px),
-      radial-gradient(80% 80% at 50% 35%, #8a2b1d 0%, #6f1d12 50%, #4f120a 100%);
-    background-size: 6mm 6mm, 6mm 6mm, 100% 100%;
-    border: 0.6mm solid #c69b4a;
+      radial-gradient(120% 120% at 20% 10%, rgba(255,215,130,0.14), transparent 45%),
+      radial-gradient(100% 100% at 85% 90%, rgba(30,20,60,0.6), transparent 55%),
+      linear-gradient(160deg, #16264b 0%, #0d1733 55%, #070d22 100%);
+    border: 0.8mm solid #d9b45c;
     color: #f3e6c4;
-    box-shadow: 0 2vh 6vh rgba(0,0,0,0.65);
+    box-shadow: 0 2vh 7vh rgba(0,0,0,0.7), inset 0 0 0 0.3mm rgba(217,180,92,0.5);
     z-index: 10;
+  }
+  .cover::before, .back-cover::before {
+    content: '';
+    position: absolute;
+    inset: 4mm;
+    border: 0.35mm solid rgba(217,180,92,0.65);
+    border-radius: 2.5mm;
+    pointer-events: none;
+  }
+  .cover::after {
+    content: '❖';
+    position: absolute;
+    top: 5mm;
+    right: 7mm;
+    font-size: 18px;
+    color: rgba(217,180,92,0.85);
+    text-shadow: 0 0 6px rgba(255,220,130,0.5);
   }
   .back-cover { z-index: 0; transform: translateZ(-2px); }
   .cover { transform: translateZ(2px); }
+  .bookmark {
+    position: absolute;
+    top: -2px;
+    right: 18%;
+    width: 12px;
+    height: 44px;
+    background: linear-gradient(180deg, #e8c15c, #a8792c);
+    border-radius: 0 0 3px 3px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+    z-index: 20;
+  }
   .cover { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
   .cover .title {
     writing-mode: vertical-rl;
     font-size: clamp(24px, 8vw, 34px);
     font-weight: 700;
     letter-spacing: 0.2em;
-    color: #f7ecd2;
+    color: #f7e9c2;
     font-family: "Songti SC", "STSong", serif;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.55);
-    border: 0.3mm solid rgba(198,155,74,0.7);
+    text-shadow: 0 0 4px rgba(255,220,130,0.4), 0 1px 3px rgba(0,0,0,0.6);
+    border: 0.3mm solid rgba(217,180,92,0.85);
     padding: 14px 8px;
   }
   .cover .seal {
@@ -69,13 +96,13 @@
     text-orientation: upright;
     font-size: 12px;
     letter-spacing: 0.2em;
-    border: 0.35mm solid #f3e6c4;
+    border: 0.35mm solid #d9b45c;
     border-radius: 1.5mm;
     padding: 8px 3px;
     margin-top: 16px;
     font-family: "Songti SC", "STSong", serif;
   }
-  .cover .meta { margin-top: 14px; font-size: 11px; line-height: 2; letter-spacing: 0.12em; color: #ecd9ac; }
+  .cover .meta { margin-top: 14px; font-size: 11px; line-height: 2; letter-spacing: 0.12em; color: #ecd9ac; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
 
   .sheet {
     position: absolute;
@@ -86,12 +113,12 @@
     border-radius: 1.5mm;
     overflow: hidden;
     backface-visibility: hidden;
-    box-shadow: inset 0 0 0 0.3mm #d8bc85, 0 1vh 3vh rgba(0,0,0,0.35);
+    box-shadow: inset 0 0 0 0.3mm #c7a967, 0 1vh 3vh rgba(0,0,0,0.35);
     transform-origin: left center;
     transition: transform 0.95s cubic-bezier(0.3, 0.6, 0.2, 0.9);
   }
   .sheet.front { z-index: 5; transform: rotateY(0deg) translateZ(1px); }
-  .sheet.back { transform: rotateY(180deg) translateZ(1px); z-index: 1; }
+  .sheet.back { transform: rotateY(180deg) translateZ(1px); z-index: 1; visibility: hidden; }
   .sheet .inner {
     position: absolute;
     inset: 0;
@@ -100,8 +127,8 @@
     flex-direction: column;
   }
   .sheet .inner::before, .sheet .inner::after { content: ''; position: absolute; pointer-events: none; }
-  .sheet .inner::before { inset: 8px; border: 0.3mm solid #7a2a18; }
-  .sheet .inner::after { inset: 12px; border: 0.15mm solid #b08a4a; }
+  .sheet .inner::before { inset: 8px; border: 0.35mm solid #2f3f6d; }
+  .sheet .inner::after { inset: 12px; border: 0.18mm solid #c7a967; }
   .sheet header {
     display: flex;
     align-items: baseline;
@@ -111,7 +138,7 @@
     position: relative;
     z-index: 1;
   }
-  .sheet header h3 { margin: 0; font-size: clamp(16px, 4.5vw, 19px); color: #7a2a18; font-family: "Songti SC", "STSong", serif; letter-spacing: 0.1em; }
+  .sheet header h3 { margin: 0; font-size: clamp(16px, 4.5vw, 19px); color: #1f2f5e; font-family: "Songti SC", "STSong", serif; letter-spacing: 0.1em; }
   .sheet header span { font-size: 10px; color: #6d5a3e; }
   .sheet footer {
     position: absolute;
@@ -120,14 +147,14 @@
     text-align: center;
     font-size: 8px;
     letter-spacing: 0.3em;
-    color: #7a5b2a;
+    color: #8a6a2a;
     z-index: 1;
   }
   .entries { flex: 1 1 auto; display: flex; flex-direction: column; gap: 10px; margin-top: 10px; position: relative; z-index: 1; min-height: 0; }
   .entry {
     border: 0.3mm solid #c4a25f;
     border-radius: 2mm;
-    background: #fffdf7;
+    background: linear-gradient(180deg, #fffdf7, #fbf5e6);
     box-shadow: 0 1px 3px rgba(70,45,20,0.14);
     display: flex;
     gap: 8px;
@@ -141,10 +168,10 @@
     text-orientation: upright;
     font-size: clamp(17px, 5vw, 21px);
     font-weight: 700;
-    color: #7a2a18;
+    color: #1f2f5e;
     border: 0.25mm solid #c98d5f;
     border-radius: 1mm;
-    background: linear-gradient(180deg, #fbf3df, #f3e6c4);
+    background: linear-gradient(180deg, #f6e9c8, #ecd9ac);
     padding: 8px 3px;
     flex: 0 0 42px;
     display: flex;
@@ -245,6 +272,7 @@
       <div class="back-cover"></div>
       <div class="sheet back"><div class="inner" id="back"></div></div>
       <div class="sheet front"><div class="inner" id="front"></div></div>
+      <div class="bookmark"></div>
       <div class="cover" id="cover"></div>
     </div>
     <div class="flip-zone left"><span class="arrow left">‹</span></div>
@@ -297,6 +325,7 @@
       if (cur > PAGES.length) return;
       busy = true;
       const f = document.querySelector('.sheet.front');
+      back.innerHTML = PAGES[cur] !== undefined ? PAGES[cur] : '';
       f.style.transition = 'transform 0.95s cubic-bezier(0.3, 0.6, 0.2, 0.9)';
       f.style.transform = 'rotateY(-180deg) translateZ(1px)';
       setTimeout(() => {
